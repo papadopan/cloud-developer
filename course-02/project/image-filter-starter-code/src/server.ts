@@ -19,7 +19,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     /**
      * If the image url is not passed as param then return 404
      */
-    if (!image_url) res.status(404).json("Not image found")
+    if (!image_url) res.status(400).json("You need to add the image_url parameter")
 
     try {
       const filtered = await filterImageFromURL(image_url)
