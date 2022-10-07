@@ -14,7 +14,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.use(bodyParser.json());
 
   app.get("/filteredimage", async (req: Request, res: Response)=>{
-    const { image_url } = req.query;
+    let { image_url } = req.query;
+    image_url = image_url.toString()
 
     /**
      * If the image url is not passed as param then return 404
@@ -23,7 +24,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     try {
       const filtered = await filterImageFromURL(image_url)
-      res.status(200).sendFile(filtered)
+
+      res.status(200).sendFile(filtered,()=>{
+        deleteLocalFiles([filtered])
+      })
     } catch(error){
       res.status(400).json(error.message)
     }
