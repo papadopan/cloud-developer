@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 interface ReqQuery {
-  image_url: string | undefined
+  image_url?: string
 }
 interface Resbody {}
 interface ReqBody {}
