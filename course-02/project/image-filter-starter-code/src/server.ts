@@ -15,12 +15,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   app.get("/filteredimage", async (req: Request, res: Response)=>{
     let { image_url } = req.query;
-    image_url = image_url.toString()
-
     /**
      * If the image url is not passed as param then return 404
      */
     if (!image_url) res.status(400).json("You need to add the image_url parameter")
+    image_url = image_url.toString()
 
     try {
       const filtered = await filterImageFromURL(image_url)
