@@ -2,6 +2,14 @@ import express, {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
+interface ReqQuery {
+  image_url: string | undefined
+}
+interface Resbody {}
+interface ReqBody {}
+interface ReqParams {}
+
+
 (async () => {
 
   // Init the Express application
@@ -13,7 +21,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  app.get("/filteredimage", async (req: Request, res: Response)=>{
+  app.get("/filteredimage", async (req: Request<ReqParams, ReqBody, Resbody, ReqQuery> ,res: Response)=>{
     let { image_url } = req.query;
     /**
      * If the image url is not passed as param then return 404
